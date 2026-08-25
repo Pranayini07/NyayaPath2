@@ -1,5 +1,5 @@
 """
-Streamlit Page Component for 🏛 Jurisdiction Navigator with Civic Trust UI Design.
+Streamlit Page Component for 🏛 Jurisdiction Navigator with Apple Design Aesthetic.
 """
 
 import streamlit as st
@@ -25,12 +25,14 @@ def init_jurisdiction_session_state():
     """Ensure all jurisdiction-specific session state keys exist without colliding with Home."""
     defaults = {
         f"{JURISDICTION_PREFIX}country": "India",
-        f"{JURISDICTION_PREFIX}state": None,
-        f"{JURISDICTION_PREFIX}court": None,
-        f"{JURISDICTION_PREFIX}domain": None,
+        f"{JURISDICTION_PREFIX}state": "-- Select State / UT --",
+        f"{JURISDICTION_PREFIX}court": "-- Select Court Level --",
+        f"{JURISDICTION_PREFIX}domain": "-- Select Legal Domain --",
         f"{JURISDICTION_PREFIX}question": "",
+        f"{JURISDICTION_PREFIX}question_preset": "",
         f"{JURISDICTION_PREFIX}response": None,
         f"{JURISDICTION_PREFIX}decision": None,
+        f"{JURISDICTION_PREFIX}context": None,
     }
     for key, val in defaults.items():
         if key not in st.session_state:
@@ -39,43 +41,58 @@ def init_jurisdiction_session_state():
 
 def reset_jurisdiction_state():
     """Reset Jurisdiction Navigator session state."""
-    st.session_state[f"{JURISDICTION_PREFIX}state"] = None
-    st.session_state[f"{JURISDICTION_PREFIX}court"] = None
-    st.session_state[f"{JURISDICTION_PREFIX}domain"] = None
+    st.session_state[f"{JURISDICTION_PREFIX}state"] = "-- Select State / UT --"
+    st.session_state[f"{JURISDICTION_PREFIX}court"] = "-- Select Court Level --"
+    st.session_state[f"{JURISDICTION_PREFIX}domain"] = "-- Select Legal Domain --"
     st.session_state[f"{JURISDICTION_PREFIX}question"] = ""
+    st.session_state[f"{JURISDICTION_PREFIX}question_preset"] = ""
     st.session_state[f"{JURISDICTION_PREFIX}response"] = None
     st.session_state[f"{JURISDICTION_PREFIX}decision"] = None
+    st.session_state[f"{JURISDICTION_PREFIX}context"] = None
     st.rerun()
 
 
 def render_jurisdiction_navigator_page():
-    """Render the 🏛 Jurisdiction Navigator page view with progressive step-cards."""
+    """Render the 🏛 Jurisdiction Navigator page view with Apple-style progressive step-cards."""
     inject_custom_css()
     init_jurisdiction_session_state()
 
-    # Header
+    # Apple Keynote Header
     st.markdown("""
-        <div class="np-brand-container">
-            <div class="np-brand-title">🏛 Jurisdiction Navigator</div>
-            <div class="np-brand-subtitle">Explore general court procedures tailored to your selected region and court level</div>
+        <div class="apple-hero-container">
+            <div class="apple-pill-badge">
+                <span class="apple-pulse-dot"></span>
+                <span>Contextual Procedural Navigator</span>
+            </div>
+            <div class="apple-hero-title">
+                Jurisdiction Navigator<span class="blue-accent">.</span>
+            </div>
+            <div class="apple-hero-subtitle">
+                Explore court workflows and legal stages tailored to your selected country, state, court tier, and legal domain.
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # Information Scope Notice
+    # Scope Notice Card
     st.markdown("""
-        <div class="np-scope-card">
-            <div class="np-scope-title">📍 Jurisdiction Context Scope</div>
-            <p class="np-scope-text">
-                Select your region, court level, and legal domain to receive structured educational guidance. 
-                Procedures vary depending on local rules and matter specifics. NyayaPath does not provide legal advice or legal representation.
+        <div class="apple-card">
+            <div class="apple-card-title">
+                <span>📍</span> Jurisdiction Scope & Local Practice Directions
+            </div>
+            <p class="apple-card-desc">
+                Procedures vary across High Courts and subordinate judicial districts. 
+                NyayaPath delivers plain-language educational breakdowns based on general statutory rules.
             </p>
         </div>
     """, unsafe_allow_html=True)
 
     # Step 1 Card: Jurisdiction
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header"><span class="np-step-number">1</span> Select Jurisdiction & Region</div>
+        <div class="apple-step-card">
+            <div class="apple-step-header">
+                <span class="apple-step-badge">1</span>
+                <span>Select Region & Country</span>
+            </div>
         </div>
     """, unsafe_allow_html=True)
     
@@ -101,8 +118,11 @@ def render_jurisdiction_navigator_page():
 
     # Step 2 Card: Court Level & Domain
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header"><span class="np-step-number">2</span> Select Court Level & Legal Domain</div>
+        <div class="apple-step-card">
+            <div class="apple-step-header">
+                <span class="apple-step-badge">2</span>
+                <span>Select Court Tier & Legal Domain</span>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -110,7 +130,7 @@ def render_jurisdiction_navigator_page():
     with col_cl:
         court_levels = ["-- Select Court Level --"] + get_court_levels_for_country(selected_country)
         selected_court = st.selectbox(
-            "Court Level",
+            "Court Level / Tier",
             options=court_levels,
             index=0,
             key=f"{JURISDICTION_PREFIX}select_court"
@@ -125,27 +145,66 @@ def render_jurisdiction_navigator_page():
             key=f"{JURISDICTION_PREFIX}select_domain"
         )
 
-    # Step 3 Card: Question
-    st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header"><span class="np-step-number">3</span> Enter Your Question</div>
+    # Apple-style Dynamic Context Pills
+    state_disp = selected_state if selected_state != "-- Select State / UT --" else "State: Any"
+    court_disp = selected_court if selected_court != "-- Select Court Level --" else "Court: Any"
+    domain_disp = selected_domain if selected_domain != "-- Select Legal Domain --" else "Domain: Any"
+
+    st.markdown(f"""
+        <div class="apple-breadcrumb-bar">
+            <span><strong>Context:</strong></span>
+            <span class="apple-breadcrumb-tag">🌐 {selected_country}</span>
+            <span>›</span>
+            <span class="apple-breadcrumb-tag">📍 {state_disp}</span>
+            <span>›</span>
+            <span class="apple-breadcrumb-tag">🏛️ {court_disp}</span>
+            <span>›</span>
+            <span class="apple-breadcrumb-tag">⚖️ {domain_disp}</span>
         </div>
     """, unsafe_allow_html=True)
-    
+
+    # Step 3 Card: Question
+    st.markdown("""
+        <div class="apple-step-card">
+            <div class="apple-step-header">
+                <span class="apple-step-badge">3</span>
+                <span>Enter Your Question</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Quick procedural question templates
+    col_q1, col_q2, col_q3 = st.columns(3)
+    with col_q1:
+        if st.button("📝 Filing Stages Breakdown", use_container_width=True, key="preset_filing"):
+            st.session_state[f"{JURISDICTION_PREFIX}question_preset"] = "What are the typical stages from initial filing to hearing in this court?"
+            st.rerun()
+    with col_q2:
+        if st.button("📜 Writ Petition Process", use_container_width=True, key="preset_writ"):
+            st.session_state[f"{JURISDICTION_PREFIX}question_preset"] = "What is the procedure for filing and listing a writ petition in the High Court?"
+            st.rerun()
+    with col_q3:
+        if st.button("⚖️ Interim Injunction Flow", use_container_width=True, key="preset_injunction"):
+            st.session_state[f"{JURISDICTION_PREFIX}question_preset"] = "What are the standard procedural steps for an application seeking interim injunction relief?"
+            st.rerun()
+
     render_privacy_notice()
+
+    preset_text = st.session_state.get(f"{JURISDICTION_PREFIX}question_preset", "")
     question_input = st.text_area(
         "What would you like to understand about court procedures in this jurisdiction?",
-        height=100,
-        placeholder="e.g. What generally happens after a civil case is filed in this court?",
+        value=preset_text,
+        height=110,
+        placeholder="e.g. What generally happens after a civil suit is filed in the District Court?",
         key=f"{JURISDICTION_PREFIX}input_question"
     )
 
     # Action Buttons (Submit & Reset)
-    col_btn1, col_btn2, col_btn3 = st.columns([2, 1.5, 1])
+    col_btn1, col_btn2, col_btn3 = st.columns([2, 1.2, 1])
     with col_btn1:
         submit_btn = st.button("Explain Jurisdiction Process", type="primary", use_container_width=True)
     with col_btn3:
-        reset_btn = st.button("↺ Start Over", use_container_width=True)
+        reset_btn = st.button("Reset All", use_container_width=True)
 
     if reset_btn:
         reset_jurisdiction_state()
@@ -172,7 +231,7 @@ def render_jurisdiction_navigator_page():
             legal_domain=selected_domain
         )
 
-        with st.spinner("Analyzing selected jurisdiction and retrieving educational explanation..."):
+        with st.spinner("Analyzing jurisdiction rules and generating explanation..."):
             decision, ai_resp = get_jurisdiction_response(question_input, context)
             st.session_state[f"{JURISDICTION_PREFIX}decision"] = decision
             st.session_state[f"{JURISDICTION_PREFIX}response"] = ai_resp
@@ -186,54 +245,61 @@ def render_jurisdiction_navigator_page():
     if ai_resp and decision:
         if not decision.allowed:
             st.markdown(f"""
-                <div class="np-refusal-card">
-                    <div class="np-refusal-title">Information Scope Notice</div>
-                    <div class="np-refusal-text">{decision.refusal_message}</div>
+                <div class="apple-refusal-card">
+                    <div class="apple-refusal-title">
+                        <span>🛡️</span>
+                        <span>Information Scope Notice</span>
+                    </div>
+                    <div class="apple-refusal-text">{decision.refusal_message}</div>
                 </div>
             """, unsafe_allow_html=True)
             st.markdown("""
-                <div class="np-tip-card">
+                <div class="apple-tip-card">
                     💡 <strong>Educational Guidance:</strong> Rephrase your question to focus on general court processes (e.g. <em>"What are the typical stages of a civil lawsuit in District Courts?"</em>).
                 </div>
             """, unsafe_allow_html=True)
         elif ai_resp.success:
             st.markdown("---")
             st.markdown(f"""
-                <div class="np-scope-card">
-                    <div class="np-scope-title">📍 Selected Jurisdiction Context</div>
-                    <div class="np-scope-text">
+                <div class="apple-card">
+                    <div class="apple-card-title">
+                        <span>📍</span> Jurisdiction Context Verified
+                    </div>
+                    <div class="apple-card-desc">
                         <strong>Country:</strong> {context.country} &nbsp;|&nbsp; 
                         <strong>State/UT:</strong> {context.state} &nbsp;|&nbsp; 
-                        <strong>Court Level:</strong> {context.court_level} &nbsp;|&nbsp; 
-                        <strong>Legal Domain:</strong> {context.legal_domain}
+                        <strong>Court Tier:</strong> {context.court_level} &nbsp;|&nbsp; 
+                        <strong>Domain:</strong> {context.legal_domain}
                     </div>
                 </div>
             """, unsafe_allow_html=True)
             
             # Structured Knowledge Article
             st.markdown(f"""
-                <div class="np-article-card">
-                    <div class="np-article-header">
-                        <span class="np-article-category">Jurisdiction Educational Explanation</span>
-                        <span class="np-article-transparency">📍 Context: {context.state}, {context.country}</span>
+                <div class="apple-article-card">
+                    <div class="apple-article-header">
+                        <span class="apple-category-badge">{context.court_level} • {context.legal_domain}</span>
+                        <span style="font-size: 0.8rem; color: #86868B;">📍 {context.state}, {context.country}</span>
                     </div>
-                    <div class="np-article-body">{ai_resp.text}</div>
+                    <div class="apple-article-body">{ai_resp.text}</div>
                 </div>
             """, unsafe_allow_html=True)
             
             st.markdown(f"""
-                <div class="np-tip-card">
-                    <strong>ℹ️ Information Scope & Authoritative Sources:</strong><br>
-                    This explanation provides general educational information based on the selected jurisdiction ({context.state}, {context.country}). 
-                    Procedures can vary depending on specific local court rules, case facts, and judicial discretion. 
-                    For authoritative information, verify details through official court portals (e.g. eCourts India) or consult a qualified advocate.
+                <div class="apple-tip-card">
+                    <strong>ℹ️ Official Verification Notice:</strong><br>
+                    This explanation provides general educational guidance based on standard rules in {context.state}, {context.country}. 
+                    Local court circulars and roster designations may vary. Always verify listing details through official court registries (e.g. <em>eCourts Services India</em>) or consult an enrolled attorney.
                 </div>
             """, unsafe_allow_html=True)
-            st.caption(f"💡 Reference ID: {ai_resp.request_id} | Educational legal information only.")
+            st.caption(f"💡 Reference ID: `{ai_resp.request_id}` | Educational information only.")
         else:
             st.markdown(f"""
-                <div class="np-refusal-card">
-                    <div class="np-refusal-title">System Message</div>
-                    <div class="np-refusal-text">{ai_resp.text}</div>
+                <div class="apple-refusal-card">
+                    <div class="apple-refusal-title">
+                        <span>⚠️</span>
+                        <span>System Message</span>
+                    </div>
+                    <div class="apple-refusal-text">{ai_resp.text}</div>
                 </div>
             """, unsafe_allow_html=True)
