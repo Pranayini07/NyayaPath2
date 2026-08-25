@@ -75,7 +75,7 @@ else:  # 🏠 Home Page
     st.markdown("""
         <div style="margin-top: 1.75rem; margin-bottom: 0.85rem;">
             <h3 style="margin-bottom: 0.2rem; color: #1D1D1F; font-weight: 700; letter-spacing: -0.02em;">🔍 Search Legal Procedures</h3>
-            <p style="font-size: 0.925rem; color: #6E6E73; margin: 0;">
+            <p style="font-size: 0.925rem; color: #515154; margin: 0;">
                 Ask any question regarding court hearings, procedural stages, or legal terminology.
             </p>
         </div>
@@ -212,21 +212,21 @@ with st.sidebar:
         
         with st.expander("📌 Procedural Workflows", expanded=True):
             st.markdown("""
-                - *What are the stages of a civil suit?*
-                - *How does a criminal trial proceed?*
-                - *What happens during an appeal?*
+                - What are the stages of a civil suit?
+                - How does a criminal trial proceed?
+                - What happens during an appeal?
             """)
         with st.expander("📖 Legal Terminology", expanded=False):
             st.markdown("""
-                - *What does "plaintiff" mean?*
-                - *What is a "written statement"?*
-                - *What is the "burden of proof"?*
+                - What does "plaintiff" mean?
+                - What is a "written statement"?
+                - What is the "burden of proof"?
             """)
         with st.expander("📑 Court Documents", expanded=False):
             st.markdown("""
-                - *What is the purpose of an affidavit?*
-                - *What is a stay order?*
-                - *What is a Vakalatnama?*
+                - What is the purpose of an affidavit?
+                - What is a stay order?
+                - What is a Vakalatnama?
             """)
         st.markdown("---")
 
@@ -234,7 +234,7 @@ with st.sidebar:
         <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #86868B; margin-bottom: 0.5rem;">
             Out-of-Scope Requests
         </div>
-        <div style="font-size: 0.8rem; color: #6E6E73; line-height: 1.55; margin-bottom: 1rem;">
+        <div style="font-size: 0.8rem; color: #515154; line-height: 1.55; margin-bottom: 1rem;">
             • Specific personal legal advice<br>
             • Litigation strategy to win<br>
             • Outcome predictions or odds<br>
