@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![AI](https://img.shields.io/badge/AI-Gemini%201.5%20Flash-green)
 ![Framework](https://img.shields.io/badge/Framework-Streamlit-red)
-![Status](https://img.shields.io/badge/Project-Active-success)
+
 
 
 A Generative AI-powered web application that explains judicial court procedures, case lifecycle stages, and legal terminology in simple, neutral language to improve public legal awareness and accessibility.
