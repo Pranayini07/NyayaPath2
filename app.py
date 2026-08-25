@@ -1,7 +1,7 @@
 """
 Judicial Court Process & Case Flow Explainer Bot - NyayaPath
 
-Main Streamlit application refactored with Trusted Civic Technology UI Design System.
+Main Streamlit application refactored with Apple-Grade Premium Design System.
 """
 
 import streamlit as st
@@ -22,7 +22,7 @@ from ui_theme import (
 # ============================================================================
 
 st.set_page_config(
-    page_title="NyayaPath — Public Legal Information & Education",
+    page_title="NyayaPath — Educational Court Process Portal",
     page_icon="⚖️",
     layout="centered",
     initial_sidebar_state="expanded"
@@ -36,15 +36,20 @@ inject_custom_css()
 
 with st.sidebar:
     st.markdown("""
-        <div style="text-align: center; padding: 0.5rem 0 1rem 0;">
-            <div style="font-size: 1.8rem; font-weight: 800; color: #0F2942; font-family: 'Outfit', sans-serif;">⚖️ NYAYAPATH</div>
-            <div style="font-size: 0.775rem; color: #64748B; font-weight: 500;">Civic Legal Literacy Portal</div>
+        <div style="text-align: center; padding: 0.5rem 0 1.25rem 0;">
+            <div style="font-size: 1.6rem; font-weight: 800; color: #1D1D1F; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em;">⚖️ NyayaPath</div>
+            <div style="font-size: 0.775rem; color: #86868B; font-weight: 500;">Civic Legal Literacy Portal</div>
         </div>
     """, unsafe_allow_html=True)
     
-    st.markdown('<div class="np-sidebar-nav-header">🧭 Navigation</div>', unsafe_allow_html=True)
+    st.markdown("""
+        <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #86868B; margin-bottom: 0.5rem;">
+            Navigation
+        </div>
+    """, unsafe_allow_html=True)
+    
     selected_page = st.radio(
-        "Navigation",
+        "Navigation Options",
         options=["🏠 Home", "🏛 Jurisdiction Navigator"],
         key="app_navigation",
         label_visibility="collapsed"
@@ -59,27 +64,27 @@ if selected_page == "🏛 Jurisdiction Navigator":
     render_jurisdiction_navigator_page()
 
 else:  # 🏠 Home Page
-    # Header & Trust Badges
+    # Apple Keynote Header & Trust Badges
     render_brand_header()
     render_trust_bar()
 
-    # Information Scope & Transparency Card
+    # Scope & Transparency Card
     render_information_scope_card()
 
     # Main Inquiry Section Header
     st.markdown("""
-        <div style="margin-top: 1.5rem; margin-bottom: 0.75rem;">
-            <h3 style="margin-bottom: 0.2rem; color: #0F2942;">🔍 Ask NyayaPath</h3>
-            <p style="font-size: 0.9rem; color: #64748B; margin: 0;">
-                Ask any question about judicial processes, court hearings, case stages, or legal terms.
+        <div style="margin-top: 1.75rem; margin-bottom: 0.85rem;">
+            <h3 style="margin-bottom: 0.2rem; color: #1D1D1F; font-weight: 700; letter-spacing: -0.02em;">🔍 Search Legal Procedures</h3>
+            <p style="font-size: 0.925rem; color: #6E6E73; margin: 0;">
+                Ask any question regarding court hearings, procedural stages, or legal terminology.
             </p>
         </div>
     """, unsafe_allow_html=True)
 
     # Quick Starter Topic Suggestions
     st.markdown("""
-        <div class="np-chips-container">
-            <div class="np-chips-label">💡 Explore Common Procedural Topics:</div>
+        <div style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #86868B; margin-bottom: 0.65rem;">
+            💡 Popular Topics:
         </div>
     """, unsafe_allow_html=True)
 
@@ -116,10 +121,10 @@ else:  # 🏠 Home Page
             st.session_state["quick_topic_selected"] = "What does 'burden of proof' mean and how does it differ in civil vs criminal cases?"
             st.rerun()
 
-    # Privacy Notice directly above input box
+    # Privacy Shield Callout
     render_privacy_notice()
 
-    # Initial value from quick topic if chosen
+    # Initial text value from quick topic if selected
     initial_text = st.session_state.get("quick_topic_selected", "")
     
     user_query = st.text_area(
@@ -130,80 +135,81 @@ else:  # 🏠 Home Page
         key="user_input"
     )
 
-    col1, col2, col3 = st.columns([1, 1.6, 1])
+    col1, col2, col3 = st.columns([1, 1.8, 1])
     with col2:
-        submit_button = st.button("✨ Explain Court Procedure", type="primary", use_container_width=True)
+        submit_button = st.button("Explain Procedure", type="primary", use_container_width=True)
 
-    # Multi-Layer Safety Evaluation & Processing
+    # Safety Evaluation & AI Processing
     if submit_button and user_query:
         decision = evaluate_query(user_query)
         
         if not decision.allowed:
-            # Display styled safe refusal card
             st.markdown(f"""
-                <div class="np-refusal-card">
-                    <div class="np-refusal-title">
+                <div class="apple-refusal-card">
+                    <div class="apple-refusal-title">
                         <span>🛡️</span>
                         <span>Information Scope Notice</span>
                     </div>
-                    <div class="np-refusal-text">{decision.refusal_message}</div>
+                    <div class="apple-refusal-text">{decision.refusal_message}</div>
                 </div>
             """, unsafe_allow_html=True)
             st.markdown("""
-                <div class="np-tip-card">
-                    💡 <strong>Educational Guidance:</strong> NyayaPath cannot give personalized counsel on specific personal disputes. Try rephrasing your question to focus on general court processes (e.g. <em>"What happens during an evidence stage in civil court?"</em> or <em>"What is the general purpose of an injunction?"</em>).
+                <div class="apple-tip-card">
+                    💡 <strong>Educational Guidance:</strong> NyayaPath cannot provide personalized guidance on specific personal disputes. Rephrase your question to focus on general legal procedures (e.g. <em>"What happens during an evidence hearing?"</em> or <em>"What is an interim order?"</em>).
                 </div>
             """, unsafe_allow_html=True)
         else:
-            with st.spinner("Analyzing question and generating plain-language educational explanation..."):
+            with st.spinner("Processing educational explanation..."):
                 ai_response = get_ai_response(user_query, decision)
                 
                 if ai_response.success:
-                    # Structured Knowledge Article Container
                     st.markdown("---")
                     st.markdown(f"""
-                        <div class="np-article-card">
-                            <div class="np-article-header">
-                                <span class="np-article-category">📖 NyayaPath Educational Article</span>
-                                <span class="np-article-transparency">🛡️ AI-Assisted Educational Content</span>
+                        <div class="apple-article-card">
+                            <div class="apple-article-header">
+                                <span class="apple-category-badge">Educational Explanation</span>
+                                <span style="font-size: 0.8rem; color: #86868B;">🛡️ AI-Assisted Educational Content</span>
                             </div>
-                            <div class="np-article-body">{ai_response.text}</div>
+                            <div class="apple-article-body">{ai_response.text}</div>
                         </div>
                     """, unsafe_allow_html=True)
-                    st.caption(f"💡 Reference ID: `{ai_response.request_id}` | Educational legal information only. Not legal advice.")
+                    st.caption(f"💡 Reference ID: `{ai_response.request_id}` | Educational information only. Not legal counsel.")
                 else:
                     st.markdown(f"""
-                        <div class="np-refusal-card">
-                            <div class="np-refusal-title">
+                        <div class="apple-refusal-card">
+                            <div class="apple-refusal-title">
                                 <span>⚠️</span>
                                 <span>System Message</span>
                             </div>
-                            <div class="np-refusal-text">{ai_response.text}</div>
+                            <div class="apple-refusal-text">{ai_response.text}</div>
                         </div>
                     """, unsafe_allow_html=True)
 
     elif submit_button and not user_query:
-        st.warning("Please enter a question before clicking 'Explain Court Procedure'.")
+        st.warning("Please enter a question before clicking 'Explain Procedure'.")
 
-    # Feature Discovery Banner for Jurisdiction Navigator
+    # Discovery Banner for Jurisdiction Navigator
     st.markdown("""
-        <div class="np-discovery-card">
-            <div>
-                <div class="np-discovery-title">🏛 Need State or Court-Specific Guidance?</div>
-                <div class="np-discovery-text">
-                    Use the <strong>Jurisdiction Navigator</strong> to explore procedures customized to your state, court tier (District, High Court), and legal domain.
-                </div>
+        <div class="apple-discovery-banner">
+            <div class="apple-discovery-title">🏛 Need Context for a Specific State or Court Tier?</div>
+            <div class="apple-discovery-text">
+                Use the <strong>Jurisdiction Navigator</strong> to explore legal procedures customized to your state, court level (District, High Court), and legal domain.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
 # ============================================================================
-# SIDEBAR SHARED FOOTER & EXAMPLES
+# SIDEBAR SHARED CONTENT
 # ============================================================================
 
 with st.sidebar:
     if selected_page == "🏠 Home":
-        st.markdown('<div class="np-sidebar-nav-header">💡 Sample Inquiries</div>', unsafe_allow_html=True)
+        st.markdown("""
+            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #86868B; margin-bottom: 0.5rem;">
+                Sample Inquiries
+            </div>
+        """, unsafe_allow_html=True)
+        
         with st.expander("📌 Procedural Workflows", expanded=True):
             st.markdown("""
                 - *What are the stages of a civil suit?*
@@ -216,7 +222,7 @@ with st.sidebar:
                 - *What is a "written statement"?*
                 - *What is the "burden of proof"?*
             """)
-        with st.expander("📑 Court Filings & Documents", expanded=False):
+        with st.expander("📑 Court Documents", expanded=False):
             st.markdown("""
                 - *What is the purpose of an affidavit?*
                 - *What is a stay order?*
@@ -224,33 +230,35 @@ with st.sidebar:
             """)
         st.markdown("---")
 
-    st.markdown('<div class="np-sidebar-nav-header">🚫 Out-of-Scope Requests</div>', unsafe_allow_html=True)
     st.markdown("""
-        <div style="font-size: 0.8rem; color: #64748B; line-height: 1.55; margin-bottom: 1rem;">
+        <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #86868B; margin-bottom: 0.5rem;">
+            Out-of-Scope Requests
+        </div>
+        <div style="font-size: 0.8rem; color: #6E6E73; line-height: 1.55; margin-bottom: 1rem;">
             • Specific personal legal advice<br>
-            • Litigation tactics to win<br>
+            • Litigation strategy to win<br>
             • Outcome predictions or odds<br>
-            • Customized document drafting
+            • Customized document generation
         </div>
     """, unsafe_allow_html=True)
 
     # Engine Status Widget
     st.markdown("""
-        <div class="np-engine-status-card">
-            <div class="np-status-row">
-                <span>AI Knowledge Model:</span>
-                <span class="np-status-tag">● Gemini AI</span>
+        <div class="apple-sidebar-status">
+            <div class="apple-status-row">
+                <span>AI Engine:</span>
+                <span class="apple-status-val">Gemini AI</span>
             </div>
-            <div class="np-status-row">
-                <span>Multi-Layer Safety:</span>
-                <span class="np-status-tag">● Active (v2.4)</span>
+            <div class="apple-status-row">
+                <span>Safety Guardrails:</span>
+                <span class="apple-status-val">Active (v2.4)</span>
             </div>
-            <div class="np-status-row">
-                <span>PII Storage:</span>
-                <span class="np-status-tag">● None (Zero Retention)</span>
+            <div class="apple-status-row">
+                <span>Data Retention:</span>
+                <span class="apple-status-val">Zero (No PII)</span>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-# Civic Footer
+# Footer
 render_footer()

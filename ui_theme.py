@@ -1,6 +1,7 @@
 """
-UI Theme and Design System for NyayaPath - Trusted Civic Technology Design.
-Provides modern, accessible, clean, and attractive styling for public legal education.
+Apple-Grade Premium Design System for NyayaPath.
+Delivers a clean, elegant, minimalist Apple aesthetic with frosted glass elements,
+unified color hierarchy, precise micro-interactions, and high-legibility typography.
 """
 
 import streamlit as st
@@ -8,734 +9,609 @@ import streamlit as st
 
 def inject_custom_css():
     """
-    Inject custom CSS for institutional trust, modern aesthetic hierarchy,
-    responsive card layouts, glassmorphism, and crisp readability.
+    Inject Apple-style CSS variables, glassmorphic card layouts, crisp typography,
+    and Streamlit dark-mode overrides for an ultra-premium experience.
     """
     st.markdown("""
         <style>
-            /* Import Modern Clean Google Fonts */
-            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+            /* Import Apple SF Pro-like Clean Google Fonts */
+            @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
             :root {
-                --np-navy-900: #071526;
-                --np-navy-800: #0F2942;
-                --np-navy-700: #1B3B5F;
-                --np-blue-600: #2563EB;
-                --np-blue-500: #3B82F6;
-                --np-blue-50: #EFF6FF;
-                --np-gold-500: #F59E0B;
-                --np-gold-600: #D97706;
-                --np-emerald-500: #10B981;
-                --np-emerald-50: #ECFDF5;
-                --np-slate-900: #0F172A;
-                --np-slate-800: #1E293B;
-                --np-slate-700: #334155;
-                --np-slate-600: #475569;
-                --np-slate-500: #64748B;
-                --np-slate-400: #94A3B8;
-                --np-slate-200: #E2E8F0;
-                --np-slate-100: #F1F5F9;
-                --np-slate-50: #F8FAFC;
-                --np-white: #FFFFFF;
-                --np-radius-sm: 8px;
-                --np-radius-md: 12px;
-                --np-radius-lg: 16px;
-                --np-radius-full: 9999px;
-                --np-shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
-                --np-shadow-md: 0 4px 14px -2px rgba(15, 41, 66, 0.08), 0 2px 6px -1px rgba(15, 41, 66, 0.04);
-                --np-shadow-lg: 0 10px 25px -3px rgba(15, 41, 66, 0.1), 0 4px 10px -2px rgba(15, 41, 66, 0.05);
+                --apple-bg: #F5F5F7;
+                --apple-card-bg: #FFFFFF;
+                --apple-sidebar-bg: #FAFAFC;
+                --apple-text-primary: #1D1D1F;
+                --apple-text-secondary: #6E6E73;
+                --apple-text-tertiary: #86868B;
+                --apple-blue: #0071E3;
+                --apple-blue-hover: #0077ED;
+                --apple-blue-light: rgba(0, 113, 227, 0.08);
+                --apple-emerald: #34C759;
+                --apple-emerald-light: rgba(52, 199, 89, 0.1);
+                --apple-gold: #FF9500;
+                --apple-gold-light: rgba(255, 149, 0, 0.1);
+                --apple-red: #FF3B30;
+                --apple-red-light: rgba(255, 59, 48, 0.08);
+                --apple-border: rgba(0, 0, 0, 0.08);
+                --apple-border-strong: #D2D2D7;
+                --apple-radius-sm: 10px;
+                --apple-radius-md: 14px;
+                --apple-radius-lg: 20px;
+                --apple-radius-pill: 9999px;
+                --apple-shadow-subtle: 0 2px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+                --apple-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+                --apple-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
             }
 
-            /* Global Typography & Resets */
-            html, body, [class*="css"], .stMarkdown {
-                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                color: var(--np-slate-800);
+            /* Force Apple Neutral Background on Entire App (Overrides Streamlit Dark Mode conflict) */
+            .stApp, [data-testid="stAppViewContainer"], .main {
+                background-color: var(--apple-bg) !important;
+                color: var(--apple-text-primary) !important;
+                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
 
-            h1, h2, h3, h4, .np-brand-title, .np-heading {
-                font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                letter-spacing: -0.015em;
-            }
-
-            /* Main Page Container & Spacing */
-            .main .block-container {
-                max-width: 860px;
-                padding-top: 1.75rem;
-                padding-bottom: 4rem;
-            }
-
-            /* Streamlit Top Header Bar & Default Multipage Nav Cleanup */
+            /* Clean up Streamlit Header & Multipage Navigation */
             header[data-testid="stHeader"] {
-                background: transparent;
+                background: transparent !important;
+                box-shadow: none !important;
             }
             div[data-testid="stSidebarNav"] {
                 display: none !important;
             }
+            .stDeployButton {
+                display: none !important;
+            }
+
+            /* Main Content Container Alignment */
+            .main .block-container {
+                max-width: 840px !important;
+                padding-top: 2rem !important;
+                padding-bottom: 5rem !important;
+            }
 
             /* ==========================================================================
-               HERO & BRAND HEADER
+               HERO & BRAND SECTION (Apple Keynote Minimalism)
                ========================================================================== */
-            .np-hero-container {
+            .apple-hero-container {
                 text-align: center;
-                margin-bottom: 2rem;
-                padding: 1.5rem 1rem 0.5rem 1rem;
-                position: relative;
+                margin-bottom: 2.25rem;
+                padding: 1rem 0 0.5rem 0;
             }
-            .np-hero-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(15, 41, 66, 0.05) 100%);
-                border: 1px solid rgba(37, 99, 235, 0.2);
-                border-radius: var(--np-radius-full);
-                padding: 0.35rem 1rem;
-                font-size: 0.8rem;
-                font-weight: 600;
-                color: var(--np-blue-600);
-                margin-bottom: 0.85rem;
-                letter-spacing: 0.02em;
-                text-transform: uppercase;
-            }
-            .np-pulse-dot {
-                width: 7px;
-                height: 7px;
-                background-color: var(--np-emerald-500);
-                border-radius: 50%;
-                box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
-                display: inline-block;
-                animation: npPulse 2s infinite;
-            }
-            @keyframes npPulse {
-                0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
-                70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-                100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-            }
-
-            .np-brand-title {
-                font-size: 2.5rem;
-                font-weight: 800;
-                color: var(--np-navy-900);
-                line-height: 1.15;
-                margin-bottom: 0.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.6rem;
-            }
-            .np-brand-title span.np-gold-text {
-                background: linear-gradient(135deg, #0F2942 30%, #2563EB 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-            .np-brand-subtitle {
-                font-size: 1.05rem;
-                font-weight: 500;
-                color: var(--np-slate-600);
-                max-width: 620px;
-                margin: 0 auto 1.25rem auto;
-                line-height: 1.55;
-            }
-
-            /* ==========================================================================
-               TRUST BADGES BAR
-               ========================================================================== */
-            .np-trust-bar {
-                display: flex;
-                justify-content: center;
-                gap: 0.75rem;
-                flex-wrap: wrap;
-                margin-bottom: 1.75rem;
-            }
-            .np-trust-badge {
+            .apple-pill-badge {
                 display: inline-flex;
                 align-items: center;
                 gap: 0.45rem;
-                background-color: var(--np-white);
-                border: 1px solid var(--np-slate-200);
-                border-radius: var(--np-radius-full);
-                padding: 0.4rem 0.95rem;
-                font-size: 0.825rem;
+                background-color: var(--apple-blue-light);
+                border: 1px solid rgba(0, 113, 227, 0.18);
+                border-radius: var(--apple-radius-pill);
+                padding: 0.35rem 0.95rem;
+                font-size: 0.775rem;
                 font-weight: 600;
-                color: var(--np-slate-700);
-                box-shadow: var(--np-shadow-sm);
-                transition: all 0.2s ease;
+                color: var(--apple-blue);
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
             }
-            .np-trust-badge:hover {
-                border-color: var(--np-blue-500);
-                transform: translateY(-1px);
-                box-shadow: var(--np-shadow-md);
+            .apple-pulse-dot {
+                width: 6px;
+                height: 6px;
+                background-color: var(--apple-emerald);
+                border-radius: 50%;
+                box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2);
             }
-            .np-trust-badge-icon {
-                font-size: 0.95rem;
+
+            .apple-hero-title {
+                font-size: 2.75rem;
+                font-weight: 800;
+                color: var(--apple-text-primary);
+                letter-spacing: -0.03em;
+                line-height: 1.1;
+                margin-bottom: 0.65rem;
+            }
+            .apple-hero-title span.blue-accent {
+                background: linear-gradient(135deg, #1D1D1F 30%, #0071E3 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .apple-hero-subtitle {
+                font-size: 1.1rem;
+                font-weight: 400;
+                color: var(--apple-text-secondary);
+                max-width: 580px;
+                margin: 0 auto;
+                line-height: 1.5;
+                letter-spacing: -0.01em;
             }
 
             /* ==========================================================================
-               INFORMATION SCOPE & TRANSPARENCY CARD
+               TRUST BADGES (Apple Pill Style)
                ========================================================================== */
-            .np-scope-card {
-                background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
-                border: 1px solid var(--np-slate-200);
-                border-left: 4px solid var(--np-navy-800);
-                border-radius: var(--np-radius-md);
-                padding: 1.25rem 1.4rem;
+            .apple-trust-row {
+                display: flex;
+                justify-content: center;
+                gap: 0.65rem;
+                flex-wrap: wrap;
+                margin-top: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            .apple-trust-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                background: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-pill);
+                padding: 0.4rem 0.9rem;
+                font-size: 0.825rem;
+                font-weight: 500;
+                color: var(--apple-text-primary);
+                box-shadow: var(--apple-shadow-subtle);
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .apple-trust-pill:hover {
+                border-color: var(--apple-blue);
+                transform: translateY(-1px);
+                box-shadow: var(--apple-shadow-card);
+            }
+
+            /* ==========================================================================
+               CARDS & TRANSPARENCY CONTAINER
+               ========================================================================== */
+            .apple-card {
+                background-color: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-lg);
+                padding: 1.5rem 1.65rem;
                 margin-bottom: 1.75rem;
-                box-shadow: var(--np-shadow-sm);
-                transition: all 0.2s ease;
+                box-shadow: var(--apple-shadow-card);
+                transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             }
-            .np-scope-card:hover {
-                box-shadow: var(--np-shadow-md);
+            .apple-card:hover {
+                box-shadow: var(--apple-shadow-hover);
+                border-color: rgba(0, 0, 0, 0.12);
             }
-            .np-scope-header {
+            .apple-card-title {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--apple-text-primary);
+                letter-spacing: -0.015em;
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
-                font-size: 0.95rem;
-                font-weight: 700;
-                color: var(--np-navy-800);
                 margin-bottom: 0.5rem;
             }
-            .np-scope-text {
-                font-size: 0.875rem;
-                color: var(--np-slate-600);
-                line-height: 1.6;
+            .apple-card-desc {
+                font-size: 0.9rem;
+                color: var(--apple-text-secondary);
+                line-height: 1.55;
                 margin: 0;
             }
-            .np-scope-pillars {
+
+            .apple-grid-split {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 0.75rem;
-                margin-top: 0.85rem;
-                padding-top: 0.85rem;
-                border-top: 1px dashed var(--np-slate-200);
+                gap: 0.85rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
             }
-            .np-pillar-item {
-                font-size: 0.8rem;
-                display: flex;
-                align-items: flex-start;
-                gap: 0.4rem;
-                color: var(--np-slate-700);
-            }
-            .np-pillar-icon {
-                flex-shrink: 0;
-                margin-top: 0.1rem;
+            .apple-grid-item {
+                font-size: 0.825rem;
+                color: var(--apple-text-primary);
+                line-height: 1.5;
             }
 
             /* ==========================================================================
-               INTERACTIVE QUICK PROMPT CHIPS
+               PRIVACY SHIELD NOTICE
                ========================================================================== */
-            .np-chips-container {
+            .apple-privacy-notice {
+                background: rgba(52, 199, 89, 0.06);
+                border: 1px solid rgba(52, 199, 89, 0.2);
+                border-radius: var(--apple-radius-md);
+                padding: 0.65rem 1rem;
+                font-size: 0.825rem;
+                color: #15803D;
                 margin-bottom: 1.25rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
             }
-            .np-chips-label {
-                font-size: 0.8rem;
+
+            /* ==========================================================================
+               ARTICLE RESPONSE CARD
+               ========================================================================== */
+            .apple-article-card {
+                background: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-lg);
+                padding: 2rem;
+                margin-top: 1.75rem;
+                margin-bottom: 2rem;
+                box-shadow: var(--apple-shadow-hover);
+            }
+            .apple-article-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 1rem;
+                margin-bottom: 1.25rem;
+                border-bottom: 1px solid var(--apple-border);
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .apple-category-badge {
+                background: var(--apple-blue-light);
+                color: var(--apple-blue);
+                border: 1px solid rgba(0, 113, 227, 0.15);
+                font-size: 0.775rem;
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.04em;
-                color: var(--np-slate-500);
-                margin-bottom: 0.5rem;
-                display: flex;
-                align-items: center;
-                gap: 0.35rem;
+                padding: 0.3rem 0.75rem;
+                border-radius: var(--apple-radius-pill);
             }
-            .np-chip-grid {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                margin-bottom: 0.5rem;
+            .apple-article-body {
+                font-size: 1rem;
+                line-height: 1.65;
+                color: var(--apple-text-primary);
             }
-            .np-topic-chip {
-                background: var(--np-white);
-                border: 1px solid var(--np-slate-200);
-                border-radius: var(--np-radius-full);
-                padding: 0.35rem 0.85rem;
-                font-size: 0.825rem;
-                font-weight: 500;
-                color: var(--np-slate-700);
-                box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-                transition: all 0.2s ease;
-                display: inline-flex;
-                align-items: center;
-                gap: 0.35rem;
-            }
-            .np-topic-chip:hover {
-                background-color: var(--np-blue-50);
-                border-color: var(--np-blue-500);
-                color: var(--np-blue-600);
-                transform: translateY(-1px);
-            }
-
-            /* ==========================================================================
-               PRIVACY & SECURITY REMINDER
-               ========================================================================== */
-            .np-privacy-box {
-                background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
-                border: 1px solid #BBF7D0;
-                border-radius: var(--np-radius-sm);
-                padding: 0.65rem 0.95rem;
-                font-size: 0.825rem;
-                color: #166534;
-                margin-top: 0.4rem;
-                margin-bottom: 1.1rem;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                box-shadow: 0 1px 2px rgba(22, 101, 52, 0.04);
-            }
-
-            /* ==========================================================================
-               KNOWLEDGE ARTICLE & AI RESPONSE CARD
-               ========================================================================== */
-            .np-article-card {
-                background-color: var(--np-white);
-                border: 1px solid var(--np-slate-200);
-                border-radius: var(--np-radius-lg);
-                box-shadow: var(--np-shadow-md);
-                padding: 1.85rem;
+            .apple-article-body h3 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: var(--apple-text-primary);
+                letter-spacing: -0.02em;
                 margin-top: 1.5rem;
-                margin-bottom: 1.75rem;
-                transition: all 0.25s ease;
+                margin-bottom: 0.6rem;
             }
-            .np-article-card:hover {
-                box-shadow: var(--np-shadow-lg);
+
+            /* ==========================================================================
+               SAFETY REFUSAL & TIP CARDS
+               ========================================================================== */
+            .apple-refusal-card {
+                background: var(--apple-red-light);
+                border: 1px solid rgba(255, 59, 48, 0.2);
+                border-radius: var(--apple-radius-md);
+                padding: 1.25rem 1.4rem;
+                margin-top: 1.25rem;
+                margin-bottom: 1.25rem;
             }
-            .np-article-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border-bottom: 1px solid var(--np-slate-100);
-                padding-bottom: 1rem;
-                margin-bottom: 1.35rem;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            .np-article-category {
-                font-size: 0.775rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: 0.06em;
-                color: var(--np-navy-800);
-                background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
-                padding: 0.35rem 0.75rem;
-                border-radius: var(--np-radius-sm);
-                border: 1px solid #BFDBFE;
-            }
-            .np-article-transparency {
-                font-size: 0.8rem;
-                font-weight: 500;
-                color: var(--np-slate-500);
+            .apple-refusal-title {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--apple-red);
+                margin-bottom: 0.35rem;
                 display: flex;
                 align-items: center;
                 gap: 0.4rem;
-                background-color: var(--np-slate-50);
-                padding: 0.3rem 0.65rem;
-                border-radius: var(--np-radius-full);
-                border: 1px solid var(--np-slate-200);
             }
-            .np-article-body {
-                font-size: 1rem;
-                line-height: 1.7;
-                color: var(--np-slate-800);
-            }
-            .np-article-body h3 {
-                color: var(--np-navy-800);
-                font-size: 1.15rem;
-                font-weight: 700;
-                margin-top: 1.4rem;
-                margin-bottom: 0.6rem;
-                border-bottom: 1px solid var(--np-slate-100);
-                padding-bottom: 0.35rem;
-            }
-            .np-article-body p {
-                margin-bottom: 0.9rem;
-            }
-            .np-article-body ul, .np-article-body ol {
-                padding-left: 1.3rem;
-                margin-bottom: 1rem;
-            }
-            .np-article-body li {
-                margin-bottom: 0.45rem;
-                line-height: 1.6;
-            }
-
-            /* ==========================================================================
-               REFUSAL & SAFETY CARDS
-               ========================================================================== */
-            .np-refusal-card {
-                background: linear-gradient(180deg, #FEF2F2 0%, #FFF5F5 100%);
-                border: 1px solid #FECACA;
-                border-left: 4px solid #EF4444;
-                border-radius: var(--np-radius-md);
-                padding: 1.35rem 1.4rem;
-                margin-top: 1.25rem;
-                margin-bottom: 1.25rem;
-                box-shadow: var(--np-shadow-sm);
-            }
-            .np-refusal-title {
-                font-size: 1rem;
-                font-weight: 700;
+            .apple-refusal-text {
+                font-size: 0.875rem;
                 color: #991B1B;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                margin-bottom: 0.45rem;
-            }
-            .np-refusal-text {
-                font-size: 0.9rem;
-                color: #7F1D1D;
-                line-height: 1.6;
+                line-height: 1.55;
                 margin: 0;
             }
 
-            /* Tip / Guidance Box */
-            .np-tip-card {
-                background-color: var(--np-slate-50);
-                border: 1px solid var(--np-slate-200);
-                border-left: 4px solid var(--np-blue-500);
-                border-radius: var(--np-radius-sm);
-                padding: 0.95rem 1.15rem;
+            .apple-tip-card {
+                background: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-left: 4px solid var(--apple-blue);
+                border-radius: var(--apple-radius-md);
+                padding: 1rem 1.2rem;
                 font-size: 0.875rem;
-                color: var(--np-slate-700);
+                color: var(--apple-text-secondary);
                 line-height: 1.55;
-                margin-bottom: 1.25rem;
-                box-shadow: var(--np-shadow-sm);
+                margin-bottom: 1.5rem;
             }
 
             /* ==========================================================================
-               JURISDICTION PROGRESSIVE STEP CARDS
+               STEP WIZARD CARDS (Jurisdiction Navigator)
                ========================================================================== */
-            .np-step-card {
-                background: var(--np-white);
-                border: 1px solid var(--np-slate-200);
-                border-radius: var(--np-radius-md);
-                padding: 1.2rem 1.35rem;
+            .apple-step-card {
+                background: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-md);
+                padding: 1.15rem 1.35rem;
                 margin-bottom: 1.1rem;
-                box-shadow: var(--np-shadow-sm);
-                transition: all 0.2s ease;
+                box-shadow: var(--apple-shadow-subtle);
             }
-            .np-step-card:hover {
-                border-color: #CBD5E1;
-                box-shadow: var(--np-shadow-md);
-            }
-            .np-step-header {
-                font-size: 0.9rem;
+            .apple-step-header {
+                font-size: 0.85rem;
                 font-weight: 700;
                 text-transform: uppercase;
-                letter-spacing: 0.05em;
-                color: var(--np-navy-800);
-                margin-bottom: 0.85rem;
+                letter-spacing: 0.04em;
+                color: var(--apple-text-primary);
                 display: flex;
                 align-items: center;
-                gap: 0.6rem;
+                gap: 0.55rem;
             }
-            .np-step-number {
-                background: linear-gradient(135deg, var(--np-navy-800) 0%, var(--np-navy-700) 100%);
-                color: var(--np-white);
+            .apple-step-badge {
+                background: var(--apple-text-primary);
+                color: #FFFFFF;
                 border-radius: 50%;
-                width: 1.6rem;
-                height: 1.6rem;
+                width: 1.5rem;
+                height: 1.5rem;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 0.8rem;
-                font-weight: 800;
-                box-shadow: 0 2px 4px rgba(15, 41, 66, 0.15);
+                font-size: 0.775rem;
+                font-weight: 700;
             }
 
-            /* Jurisdiction Active Breadcrumb Bar */
-            .np-breadcrumb-bar {
-                background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
-                border: 1px solid #DBEAFE;
-                border-radius: var(--np-radius-md);
-                padding: 0.85rem 1.15rem;
+            /* Dynamic Breadcrumb Bar */
+            .apple-breadcrumb-bar {
+                background: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-md);
+                padding: 0.85rem 1.2rem;
                 margin-bottom: 1.35rem;
                 display: flex;
                 align-items: center;
-                gap: 0.6rem;
+                gap: 0.5rem;
                 font-size: 0.85rem;
-                color: var(--np-navy-800);
+                color: var(--apple-text-primary);
                 flex-wrap: wrap;
+                box-shadow: var(--apple-shadow-subtle);
             }
-            .np-breadcrumb-tag {
-                background: var(--np-white);
-                border: 1px solid #BFDBFE;
-                border-radius: var(--np-radius-full);
-                padding: 0.25rem 0.65rem;
+            .apple-breadcrumb-tag {
+                background: var(--apple-bg);
+                border: 1px solid var(--apple-border-strong);
+                border-radius: var(--apple-radius-pill);
+                padding: 0.25rem 0.7rem;
                 font-size: 0.8rem;
                 font-weight: 600;
-                color: var(--np-blue-600);
+                color: var(--apple-text-primary);
             }
 
-            /* ==========================================================================
-               DISCOVERY CARD
-               ========================================================================== */
-            .np-discovery-card {
-                background: linear-gradient(135deg, #0F2942 0%, #1E3A8A 100%);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: var(--np-radius-lg);
-                padding: 1.5rem 1.6rem;
+            /* Feature Banner */
+            .apple-discovery-banner {
+                background: linear-gradient(135deg, #1D1D1F 0%, #0071E3 100%);
+                border-radius: var(--apple-radius-lg);
+                padding: 1.6rem 1.8rem;
                 margin-top: 2.25rem;
                 margin-bottom: 1.5rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: var(--np-white);
-                box-shadow: var(--np-shadow-lg);
-                position: relative;
-                overflow: hidden;
+                color: #FFFFFF;
+                box-shadow: var(--apple-shadow-card);
             }
-            .np-discovery-card::after {
-                content: "⚖️";
-                position: absolute;
-                right: -10px;
-                bottom: -20px;
-                font-size: 6rem;
-                opacity: 0.08;
-                pointer-events: none;
-            }
-            .np-discovery-title {
-                font-size: 1.1rem;
+            .apple-discovery-title {
+                font-size: 1.15rem;
                 font-weight: 700;
                 color: #FFFFFF;
-                margin-bottom: 0.3rem;
-                display: flex;
-                align-items: center;
-                gap: 0.4rem;
+                margin-bottom: 0.35rem;
+                letter-spacing: -0.02em;
             }
-            .np-discovery-text {
-                font-size: 0.875rem;
-                color: #CBD5E1;
+            .apple-discovery-text {
+                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.85);
                 line-height: 1.5;
             }
 
             /* ==========================================================================
-               STREAMLIT WIDGET OVERRIDES & POLISH
+               SIDEBAR (Apple Minimalist Sidebar)
                ========================================================================== */
-            /* Primary Button */
-            div.stButton > button[kind="primary"] {
-                background: linear-gradient(135deg, #0F2942 0%, #1E3A8A 100%) !important;
-                color: #FFFFFF !important;
-                border: none !important;
-                border-radius: var(--np-radius-md) !important;
-                padding: 0.65rem 1.4rem !important;
-                font-weight: 700 !important;
-                font-size: 0.95rem !important;
-                letter-spacing: 0.01em !important;
-                box-shadow: 0 4px 12px rgba(15, 41, 66, 0.2) !important;
-                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            section[data-testid="stSidebar"] {
+                background-color: var(--apple-sidebar-bg) !important;
+                border-right: 1px solid var(--apple-border) !important;
             }
-            div.stButton > button[kind="primary"]:hover {
-                transform: translateY(-2px) !important;
-                box-shadow: 0 6px 18px rgba(30, 58, 138, 0.3) !important;
-            }
-            div.stButton > button[kind="primary"]:active {
-                transform: translateY(0) !important;
+            section[data-testid="stSidebar"] .block-container {
+                padding-top: 1.75rem !important;
             }
 
-            /* Secondary / Standard Button */
-            div.stButton > button:not([kind="primary"]) {
-                background-color: var(--np-white) !important;
-                color: var(--np-slate-700) !important;
-                border: 1px solid var(--np-slate-200) !important;
-                border-radius: var(--np-radius-md) !important;
-                font-weight: 600 !important;
+            /* Radio Buttons Clean Apple Pill Override */
+            div[data-testid="stRadio"] > label {
+                display: none !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] {
+                gap: 0.35rem !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label {
+                background: transparent !important;
+                border: 1px solid transparent !important;
+                border-radius: var(--apple-radius-sm) !important;
+                padding: 0.55rem 0.85rem !important;
                 font-size: 0.9rem !important;
+                font-weight: 600 !important;
+                color: var(--apple-text-primary) !important;
                 transition: all 0.2s ease !important;
+                cursor: pointer !important;
+                width: 100% !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
+                background: rgba(0, 0, 0, 0.04) !important;
+            }
+            div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"] {
+                background: #FFFFFF !important;
+                border-color: var(--apple-border) !important;
+                color: var(--apple-blue) !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
+            }
+
+            /* Expander Containers in Sidebar */
+            div[data-testid="stExpander"] {
+                background-color: var(--apple-card-bg) !important;
+                border: 1px solid var(--apple-border) !important;
+                border-radius: var(--apple-radius-md) !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
+                margin-bottom: 0.5rem !important;
+            }
+            div[data-testid="stExpander"] details summary span {
+                font-size: 0.85rem !important;
+                font-weight: 600 !important;
+                color: var(--apple-text-primary) !important;
+            }
+
+            /* ==========================================================================
+               STREAMLIT CONTROLS (BUTTONS, TEXTAREAS, SELECTBOXES)
+               ========================================================================== */
+            /* Primary Button (Apple Signature Blue Pill) */
+            div.stButton > button[kind="primary"] {
+                background: linear-gradient(180deg, #0077ED 0%, #0066CC 100%) !important;
+                color: #FFFFFF !important;
+                border: none !important;
+                border-radius: var(--apple-radius-pill) !important;
+                padding: 0.65rem 1.6rem !important;
+                font-weight: 600 !important;
+                font-size: 0.95rem !important;
+                letter-spacing: -0.01em !important;
+                box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25) !important;
+                transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+            div.stButton > button[kind="primary"]:hover {
+                transform: scale(1.015) !important;
+                box-shadow: 0 6px 20px rgba(0, 113, 227, 0.35) !important;
+            }
+            div.stButton > button[kind="primary"]:active {
+                transform: scale(0.98) !important;
+            }
+
+            /* Secondary Button */
+            div.stButton > button:not([kind="primary"]) {
+                background: var(--apple-card-bg) !important;
+                color: var(--apple-text-primary) !important;
+                border: 1px solid var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-pill) !important;
+                font-weight: 500 !important;
+                font-size: 0.875rem !important;
+                transition: all 0.2s ease !important;
+                box-shadow: var(--apple-shadow-subtle) !important;
             }
             div.stButton > button:not([kind="primary"]):hover {
-                border-color: var(--np-slate-400) !important;
-                background-color: var(--np-slate-50) !important;
+                background: var(--apple-bg) !important;
+                border-color: var(--apple-blue) !important;
+                color: var(--apple-blue) !important;
                 transform: translateY(-1px) !important;
             }
 
-            /* Textarea & Inputs */
+            /* Textarea Input */
             .stTextArea textarea {
-                border-radius: var(--np-radius-md) !important;
-                border: 1.5px solid var(--np-slate-200) !important;
-                font-family: inherit !important;
+                background-color: var(--apple-card-bg) !important;
+                color: var(--apple-text-primary) !important;
+                border: 1px solid var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-md) !important;
                 font-size: 0.95rem !important;
-                padding: 0.85rem !important;
+                padding: 0.85rem 1rem !important;
+                line-height: 1.5 !important;
                 transition: all 0.2s ease !important;
-                background-color: var(--np-white) !important;
             }
             .stTextArea textarea:focus {
-                border-color: var(--np-blue-500) !important;
-                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+                border-color: var(--apple-blue) !important;
+                box-shadow: 0 0 0 4px var(--apple-blue-light) !important;
             }
 
-            /* Selectbox */
+            /* Selectbox Input */
             div[data-baseweb="select"] > div {
-                border-radius: var(--np-radius-md) !important;
-                border-color: var(--np-slate-200) !important;
+                background-color: var(--apple-card-bg) !important;
+                border-color: var(--apple-border-strong) !important;
+                border-radius: var(--apple-radius-md) !important;
+                color: var(--apple-text-primary) !important;
             }
 
-            /* Sidebar Styling */
-            section[data-testid="stSidebar"] {
-                background-color: #F8FAFC !important;
-                border-right: 1px solid var(--np-slate-200) !important;
-            }
-            section[data-testid="stSidebar"] .block-container {
-                padding-top: 2rem !important;
-            }
-
-            /* Sidebar Navigation Box */
-            .np-sidebar-nav-header {
-                display: flex;
-                align-items: center;
-                gap: 0.4rem;
-                font-size: 0.8rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                color: var(--np-slate-500);
-                margin-bottom: 0.6rem;
-            }
-
-            /* Sidebar Engine Status Card */
-            .np-engine-status-card {
-                background: var(--np-white);
-                border: 1px solid var(--np-slate-200);
-                border-radius: var(--np-radius-md);
+            /* Engine Status Card in Sidebar */
+            .apple-sidebar-status {
+                background: var(--apple-card-bg);
+                border: 1px solid var(--apple-border);
+                border-radius: var(--apple-radius-md);
                 padding: 0.85rem 1rem;
-                margin-top: 1.5rem;
                 font-size: 0.8rem;
-                box-shadow: var(--np-shadow-sm);
+                box-shadow: var(--apple-shadow-subtle);
+                margin-top: 1.5rem;
             }
-            .np-status-row {
+            .apple-status-row {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 0.35rem;
-                color: var(--np-slate-600);
+                color: var(--apple-text-secondary);
             }
-            .np-status-row:last-child {
+            .apple-status-row:last-child {
                 margin-bottom: 0;
             }
-            .np-status-tag {
-                font-weight: 700;
-                color: var(--np-emerald-500);
-                display: inline-flex;
-                align-items: center;
-                gap: 0.3rem;
+            .apple-status-val {
+                font-weight: 600;
+                color: var(--apple-emerald);
             }
 
-            /* ==========================================================================
-               FOOTER STYLING
-               ========================================================================== */
-            .np-footer {
+            /* Footer */
+            .apple-footer {
                 text-align: center;
-                border-top: 1px solid var(--np-slate-200);
+                border-top: 1px solid var(--apple-border);
                 padding-top: 2rem;
-                margin-top: 3.5rem;
-                font-size: 0.85rem;
-                color: var(--np-slate-500);
+                margin-top: 4rem;
+                font-size: 0.825rem;
+                color: var(--apple-text-tertiary);
             }
-            .np-footer-brand {
-                font-family: 'Outfit', sans-serif;
+            .apple-footer-title {
                 font-weight: 700;
+                color: var(--apple-text-primary);
                 font-size: 0.95rem;
-                color: var(--np-navy-900);
                 margin-bottom: 0.35rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.4rem;
             }
-            .np-footer-links {
-                display: flex;
-                justify-content: center;
-                gap: 1.25rem;
-                margin: 0.5rem 0;
-                font-size: 0.8rem;
-                color: var(--np-slate-600);
-            }
-            .np-footer-notice {
+            .apple-footer-text {
                 font-size: 0.775rem;
-                color: var(--np-slate-400);
                 max-width: 580px;
-                margin: 0.5rem auto 0 auto;
+                margin: 0.4rem auto 0 auto;
                 line-height: 1.5;
-            }
-
-            /* Responsive Adjustments */
-            @media (max-width: 640px) {
-                .np-brand-title {
-                    font-size: 1.9rem;
-                }
-                .np-scope-pillars {
-                    grid-template-columns: 1fr;
-                }
-                .np-trust-bar {
-                    gap: 0.5rem;
-                }
-                .np-article-card {
-                    padding: 1.25rem;
-                }
             }
         </style>
     """, unsafe_allow_html=True)
 
 
 def render_brand_header():
-    """Render institutional civic brand hero header."""
+    """Render Apple-style minimalist hero header."""
     st.markdown("""
-        <div class="np-hero-container">
-            <div class="np-hero-badge">
-                <span class="np-pulse-dot"></span>
-                <span>Civic Legal Literacy Platform</span>
+        <div class="apple-hero-container">
+            <div class="apple-pill-badge">
+                <span class="apple-pulse-dot"></span>
+                <span>Civic Legal Knowledge Platform</span>
             </div>
-            <div class="np-brand-title">
-                ⚖️ <span class="np-gold-text">NYAYAPATH</span>
+            <div class="apple-hero-title">
+                NyayaPath<span class="blue-accent">.</span>
             </div>
-            <div class="np-brand-subtitle">
-                Accessible, plain-language judicial court process education & procedural guidance for citizens.
+            <div class="apple-hero-subtitle">
+                Accessible, plain-language judicial court process education and procedural guidance for every citizen.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
 
 def render_trust_bar():
-    """Render institutional trust and safety badges bar."""
+    """Render Apple-style trust pills row."""
     st.markdown("""
-        <div class="np-trust-bar">
-            <div class="np-trust-badge">
-                <span class="np-trust-badge-icon">📖</span>
-                <span>Plain Language Procedures</span>
+        <div class="apple-trust-row">
+            <div class="apple-trust-pill">
+                <span>📖</span> Plain Language
             </div>
-            <div class="np-trust-badge">
-                <span class="np-trust-badge-icon">🔒</span>
-                <span>Zero Data Retention</span>
+            <div class="apple-trust-pill">
+                <span>🔒</span> Zero Data Retention
             </div>
-            <div class="np-trust-badge">
-                <span class="np-trust-badge-icon">🛡️</span>
-                <span>Active Safety Guardrails</span>
+            <div class="apple-trust-pill">
+                <span>🛡️</span> Active Safety Engine
             </div>
-            <div class="np-trust-badge">
-                <span class="np-trust-badge-icon">🏛️</span>
-                <span>Jurisdiction-Aware</span>
+            <div class="apple-trust-pill">
+                <span>🏛️</span> Jurisdiction-Aware
             </div>
         </div>
     """, unsafe_allow_html=True)
 
 
 def render_information_scope_card():
-    """Render clear, non-alarming two-column information scope transparency card."""
+    """Render Apple-style clean card with scope transparency."""
     st.markdown("""
-        <div class="np-scope-card">
-            <div class="np-scope-header">
-                <span>ⓘ</span>
-                <span>Educational Purpose & Transparency Scope</span>
+        <div class="apple-card">
+            <div class="apple-card-title">
+                <span>ⓘ</span> Educational Purpose & Scope Transparency
             </div>
-            <p class="np-scope-text">
-                NyayaPath helps citizens understand general court workflows, standard litigation stages, and legal terminology.
+            <p class="apple-card-desc">
+                NyayaPath provides neutral educational information to help citizens understand legal processes, terminology, and typical court stages.
             </p>
-            <div class="np-scope-pillars">
-                <div class="np-pillar-item">
-                    <span class="np-pillar-icon">✅</span>
-                    <span><strong>What it provides:</strong> General court procedures, document explanations, and neutral case flow steps.</span>
+            <div class="apple-grid-split">
+                <div class="apple-grid-item">
+                    ✅ <strong>What it provides:</strong> General procedural breakdowns, document functions, and case flow explanations.
                 </div>
-                <div class="np-pillar-item">
-                    <span class="np-pillar-icon">🚫</span>
-                    <span><strong>What it avoids:</strong> Personalized legal counsel, litigation strategy, predictions, or legal representation.</span>
+                <div class="apple-grid-item">
+                    🚫 <strong>What it avoids:</strong> Personalized legal counsel, case strategy, outcome predictions, or formal representation.
                 </div>
             </div>
         </div>
@@ -743,32 +619,26 @@ def render_information_scope_card():
 
 
 def render_privacy_notice():
-    """Render subtle privacy reminder."""
+    """Render Apple privacy shield badge."""
     st.markdown("""
-        <div class="np-privacy-box">
+        <div class="apple-privacy-notice">
             <span>🔒</span>
-            <span><strong>Privacy Shield Active:</strong> Do not enter sensitive personally identifiable information (Aadhaar/SSN), bank details, or private case numbers.</span>
+            <span><strong>Privacy Shield:</strong> Never enter sensitive personal identifiers (SSN/Aadhaar), bank details, or private case numbers.</span>
         </div>
     """, unsafe_allow_html=True)
 
 
 def render_footer():
-    """Render civic footer with official references."""
+    """Render Apple minimal civic footer."""
     st.markdown("""
-        <div class="np-footer">
-            <div class="np-footer-brand">
-                ⚖️ NYAYAPATH — Independent Civic Legal Education Platform
+        <div class="apple-footer">
+            <div class="apple-footer-title">
+                NyayaPath — Public Legal Information Platform
             </div>
-            <div class="np-footer-links">
-                <span>📚 Public Legal Education</span>
-                <span>•</span>
-                <span>🛡️ AI Safety-Protected</span>
-                <span>•</span>
-                <span>🏛️ eCourts Aligned</span>
-            </div>
-            <div class="np-footer-notice">
-                Disclaimer: NyayaPath provides purely educational information and does not constitute formal legal counsel. 
-                For specific legal proceedings, always verify details with official court registries or consult an enrolled advocate. © 2026 NyayaPath.
+            <div>Educational Purpose • AI Safety-Engine Protected • eCourts Aligned</div>
+            <div class="apple-footer-text">
+                Disclaimer: NyayaPath provides educational information only and does not constitute formal legal counsel. 
+                Always verify court procedures with official court registries or consult a licensed attorney. © 2026 NyayaPath.
             </div>
         </div>
     """, unsafe_allow_html=True)
