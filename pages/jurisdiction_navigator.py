@@ -1,5 +1,5 @@
 """
-Streamlit Page Component for 🏛 Jurisdiction Navigator with Modern Civic Design.
+Streamlit Page Component for 🏛 Jurisdiction Navigator with Apple Design Aesthetic.
 """
 
 import streamlit as st
@@ -29,6 +29,7 @@ def init_jurisdiction_session_state():
         f"{JURISDICTION_PREFIX}court": "-- Select Court Level --",
         f"{JURISDICTION_PREFIX}domain": "-- Select Legal Domain --",
         f"{JURISDICTION_PREFIX}question": "",
+        f"{JURISDICTION_PREFIX}question_preset": "",
         f"{JURISDICTION_PREFIX}response": None,
         f"{JURISDICTION_PREFIX}decision": None,
         f"{JURISDICTION_PREFIX}context": None,
@@ -52,46 +53,45 @@ def reset_jurisdiction_state():
 
 
 def render_jurisdiction_navigator_page():
-    """Render the 🏛 Jurisdiction Navigator page view with modern progressive step-cards."""
+    """Render the 🏛 Jurisdiction Navigator page view with Apple-style progressive step-cards."""
     inject_custom_css()
     init_jurisdiction_session_state()
 
-    # Hero Header for Jurisdiction
+    # Apple Keynote Header
     st.markdown("""
-        <div class="np-hero-container">
-            <div class="np-hero-badge">
-                <span class="np-pulse-dot"></span>
+        <div class="apple-hero-container">
+            <div class="apple-pill-badge">
+                <span class="apple-pulse-dot"></span>
                 <span>Contextual Procedural Navigator</span>
             </div>
-            <div class="np-brand-title">
-                🏛️ <span class="np-gold-text">Jurisdiction Navigator</span>
+            <div class="apple-hero-title">
+                Jurisdiction Navigator<span class="blue-accent">.</span>
             </div>
-            <div class="np-brand-subtitle">
+            <div class="apple-hero-subtitle">
                 Explore court workflows and legal stages tailored to your selected country, state, court tier, and legal domain.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # Information Scope Notice
+    # Scope Notice Card
     st.markdown("""
-        <div class="np-scope-card">
-            <div class="np-scope-header">
-                <span>📍</span>
-                <span>Jurisdiction Scope & Local Rule Variations</span>
+        <div class="apple-card">
+            <div class="apple-card-title">
+                <span>📍</span> Jurisdiction Scope & Local Practice Directions
             </div>
-            <p class="np-scope-text">
-                Court rules and practice directions vary between states and court tiers (e.g. High Courts vs District Courts). 
-                NyayaPath provides neutral procedural breakdowns based on standard statutory frameworks. It does not provide legal representation.
+            <p class="apple-card-desc">
+                Procedures vary across High Courts and subordinate judicial districts. 
+                NyayaPath delivers plain-language educational breakdowns based on general statutory rules.
             </p>
         </div>
     """, unsafe_allow_html=True)
 
     # Step 1 Card: Jurisdiction
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header">
-                <span class="np-step-number">1</span>
-                <span>Select Country & State / Region</span>
+        <div class="apple-step-card">
+            <div class="apple-step-header">
+                <span class="apple-step-badge">1</span>
+                <span>Select Region & Country</span>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -118,9 +118,9 @@ def render_jurisdiction_navigator_page():
 
     # Step 2 Card: Court Level & Domain
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header">
-                <span class="np-step-number">2</span>
+        <div class="apple-step-card">
+            <div class="apple-step-header">
+                <span class="apple-step-badge">2</span>
                 <span>Select Court Tier & Legal Domain</span>
             </div>
         </div>
@@ -145,30 +145,30 @@ def render_jurisdiction_navigator_page():
             key=f"{JURISDICTION_PREFIX}select_domain"
         )
 
-    # Dynamic Live Context Breadcrumb
-    state_display = selected_state if selected_state != "-- Select State / UT --" else "State: Any"
-    court_display = selected_court if selected_court != "-- Select Court Level --" else "Court: Any"
-    domain_display = selected_domain if selected_domain != "-- Select Legal Domain --" else "Domain: Any"
+    # Apple-style Dynamic Context Pills
+    state_disp = selected_state if selected_state != "-- Select State / UT --" else "State: Any"
+    court_disp = selected_court if selected_court != "-- Select Court Level --" else "Court: Any"
+    domain_disp = selected_domain if selected_domain != "-- Select Legal Domain --" else "Domain: Any"
 
     st.markdown(f"""
-        <div class="np-breadcrumb-bar">
-            <span><strong>Active Context:</strong></span>
-            <span class="np-breadcrumb-tag">🌐 {selected_country}</span>
+        <div class="apple-breadcrumb-bar">
+            <span><strong>Context:</strong></span>
+            <span class="apple-breadcrumb-tag">🌐 {selected_country}</span>
             <span>›</span>
-            <span class="np-breadcrumb-tag">📍 {state_display}</span>
+            <span class="apple-breadcrumb-tag">📍 {state_disp}</span>
             <span>›</span>
-            <span class="np-breadcrumb-tag">🏛️ {court_display}</span>
+            <span class="apple-breadcrumb-tag">🏛️ {court_disp}</span>
             <span>›</span>
-            <span class="np-breadcrumb-tag">⚖️ {domain_display}</span>
+            <span class="apple-breadcrumb-tag">⚖️ {domain_disp}</span>
         </div>
     """, unsafe_allow_html=True)
 
     # Step 3 Card: Question
     st.markdown("""
-        <div class="np-step-card">
-            <div class="np-step-header">
-                <span class="np-step-number">3</span>
-                <span>Enter Your Procedural Question</span>
+        <div class="apple-step-card">
+            <div class="apple-step-header">
+                <span class="apple-step-badge">3</span>
+                <span>Enter Your Question</span>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -202,9 +202,9 @@ def render_jurisdiction_navigator_page():
     # Action Buttons (Submit & Reset)
     col_btn1, col_btn2, col_btn3 = st.columns([2, 1.2, 1])
     with col_btn1:
-        submit_btn = st.button("✨ Explain Jurisdiction Process", type="primary", use_container_width=True)
+        submit_btn = st.button("Explain Jurisdiction Process", type="primary", use_container_width=True)
     with col_btn3:
-        reset_btn = st.button("↺ Reset All", use_container_width=True)
+        reset_btn = st.button("Reset All", use_container_width=True)
 
     if reset_btn:
         reset_jurisdiction_state()
@@ -221,7 +221,7 @@ def render_jurisdiction_navigator_page():
             st.warning("Please select a Legal Domain before continuing.")
             return
         if not question_input or not question_input.strip():
-            st.warning("Please enter your procedural question before continuing.")
+            st.warning("Please enter your question before continuing.")
             return
 
         context = JurisdictionContext(
@@ -231,7 +231,7 @@ def render_jurisdiction_navigator_page():
             legal_domain=selected_domain
         )
 
-        with st.spinner("Analyzing selected jurisdiction rules and retrieving educational explanation..."):
+        with st.spinner("Analyzing jurisdiction rules and generating explanation..."):
             decision, ai_resp = get_jurisdiction_response(question_input, context)
             st.session_state[f"{JURISDICTION_PREFIX}decision"] = decision
             st.session_state[f"{JURISDICTION_PREFIX}response"] = ai_resp
@@ -245,66 +245,61 @@ def render_jurisdiction_navigator_page():
     if ai_resp and decision:
         if not decision.allowed:
             st.markdown(f"""
-                <div class="np-refusal-card">
-                    <div class="np-refusal-title">
+                <div class="apple-refusal-card">
+                    <div class="apple-refusal-title">
                         <span>🛡️</span>
                         <span>Information Scope Notice</span>
                     </div>
-                    <div class="np-refusal-text">{decision.refusal_message}</div>
+                    <div class="apple-refusal-text">{decision.refusal_message}</div>
                 </div>
             """, unsafe_allow_html=True)
             st.markdown("""
-                <div class="np-tip-card">
+                <div class="apple-tip-card">
                     💡 <strong>Educational Guidance:</strong> Rephrase your question to focus on general court processes (e.g. <em>"What are the typical stages of a civil lawsuit in District Courts?"</em>).
                 </div>
             """, unsafe_allow_html=True)
         elif ai_resp.success:
             st.markdown("---")
             st.markdown(f"""
-                <div class="np-scope-card">
-                    <div class="np-scope-header">
-                        <span>📍</span>
-                        <span>Jurisdiction Context Verified</span>
+                <div class="apple-card">
+                    <div class="apple-card-title">
+                        <span>📍</span> Jurisdiction Context Verified
                     </div>
-                    <div class="np-scope-text" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <span><strong>Country:</strong> {context.country}</span>
-                        <span>•</span>
-                        <span><strong>State/UT:</strong> {context.state}</span>
-                        <span>•</span>
-                        <span><strong>Court Tier:</strong> {context.court_level}</span>
-                        <span>•</span>
-                        <span><strong>Domain:</strong> {context.legal_domain}</span>
+                    <div class="apple-card-desc">
+                        <strong>Country:</strong> {context.country} &nbsp;|&nbsp; 
+                        <strong>State/UT:</strong> {context.state} &nbsp;|&nbsp; 
+                        <strong>Court Tier:</strong> {context.court_level} &nbsp;|&nbsp; 
+                        <strong>Domain:</strong> {context.legal_domain}
                     </div>
                 </div>
             """, unsafe_allow_html=True)
             
             # Structured Knowledge Article
             st.markdown(f"""
-                <div class="np-article-card">
-                    <div class="np-article-header">
-                        <span class="np-article-category">🏛️ {context.court_level} • {context.legal_domain}</span>
-                        <span class="np-article-transparency">📍 {context.state}, {context.country}</span>
+                <div class="apple-article-card">
+                    <div class="apple-article-header">
+                        <span class="apple-category-badge">{context.court_level} • {context.legal_domain}</span>
+                        <span style="font-size: 0.8rem; color: #86868B;">📍 {context.state}, {context.country}</span>
                     </div>
-                    <div class="np-article-body">{ai_resp.text}</div>
+                    <div class="apple-article-body">{ai_resp.text}</div>
                 </div>
             """, unsafe_allow_html=True)
             
             st.markdown(f"""
-                <div class="np-tip-card">
-                    <strong>ℹ️ Official Court Portals & Authoritative Verification:</strong><br>
+                <div class="apple-tip-card">
+                    <strong>ℹ️ Official Verification Notice:</strong><br>
                     This explanation provides general educational guidance based on standard rules in {context.state}, {context.country}. 
-                    Specific local court practices, roster designations, and e-filing circulars may vary. 
-                    Always verify listing status and circulars through official court registries (e.g. <em>eCourts Services India</em>) or consult an enrolled advocate.
+                    Local court circulars and roster designations may vary. Always verify listing details through official court registries (e.g. <em>eCourts Services India</em>) or consult an enrolled attorney.
                 </div>
             """, unsafe_allow_html=True)
-            st.caption(f"💡 Reference ID: `{ai_resp.request_id}` | Educational legal information only.")
+            st.caption(f"💡 Reference ID: `{ai_resp.request_id}` | Educational information only.")
         else:
             st.markdown(f"""
-                <div class="np-refusal-card">
-                    <div class="np-refusal-title">
+                <div class="apple-refusal-card">
+                    <div class="apple-refusal-title">
                         <span>⚠️</span>
                         <span>System Message</span>
                     </div>
-                    <div class="np-refusal-text">{ai_resp.text}</div>
+                    <div class="apple-refusal-text">{ai_resp.text}</div>
                 </div>
             """, unsafe_allow_html=True)
