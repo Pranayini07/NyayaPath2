@@ -175,6 +175,3 @@ For issues or questions:
 
 ---
 
-**Built with responsibility and ethics in mind for public legal awareness.**
-
-"# NyayaPath" 
